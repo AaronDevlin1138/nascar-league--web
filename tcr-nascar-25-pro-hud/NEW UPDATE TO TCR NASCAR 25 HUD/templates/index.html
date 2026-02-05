@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCR NASCAR 25 HUD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: black;
+            color: white;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Video Background Container */
+        .video-bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .video-bg-container iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 56.25vw; /* 16:9 Aspect Ratio */
+            min-height: 100vh;
+            min-width: 177.77vh; /* 16:9 Aspect Ratio */
+            transform: translate(-50%, -50%);
+            opacity: 0.4; /* Dimmed for UI readability */
+        }
+
+        /* Overlay to darken and enhance contrast */
+        .video-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%), 
+                        linear-gradient(to bottom, rgba(0,0,0,0.4), transparent, rgba(0,0,0,0.8));
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Global scanline effect for broadcast feel */
+        body::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 255, 0.01));
+            background-size: 100% 3px, 4px 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.2;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "socket.io-client": "https://cdn.socket.io/4.7.2/socket.io.esm.min.js"
+  }
+}
+</script>
+</head>
+<body>
+    <!-- Global HD Video Background -->
+    <div class="video-bg-container">
+        <iframe 
+            src="https://www.youtube.com/embed/9Ex3QrNF6m0?autoplay=1&mute=1&loop=1&playlist=9Ex3QrNF6m0&controls=0&enablejsapi=1" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen>
+        </iframe>
+    </div>
+    <div class="video-overlay"></div>
+
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

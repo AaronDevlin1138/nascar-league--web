@@ -1,0 +1,7 @@
+{
+  "name": "TCR NASCAR 25 Pro HUD",
+  "description": "Professional iRacing broadcast HUD for TCR Cup Series with real-time telemetry and NBA score integration.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
